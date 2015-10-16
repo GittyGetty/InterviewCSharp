@@ -48,6 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Combinatorics.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Trees.cs" />
     <Compile Include="Program.cs" />
