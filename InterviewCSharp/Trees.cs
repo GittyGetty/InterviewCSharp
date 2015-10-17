@@ -155,7 +155,7 @@ public static class Trees
         var randomizer = new Random(seed);
 
         Node<T> root = null;
-        Action<Node<T>> rootSetter = (Node<T> r) => { root = r; };
+        Action<Node<T>> rootSetter = r => { root = r; };
         nodeSetters.Add(rootSetter);
 
         while (valueList.Count > 0)
@@ -169,8 +169,8 @@ public static class Trees
             nodeSetters[nodeIndex](node);
             nodeSetters.RemoveAt(nodeIndex);
 
-            Action<Node<T>> leftSetter = (Node<T> left) => { node.Left = left; };
-            Action<Node<T>> rightSetter = (Node<T> right) => { node.Right = right; };
+            Action<Node<T>> leftSetter = left => { node.Left = left; };
+            Action<Node<T>> rightSetter = right => { node.Right = right; };
 
             nodeSetters.Add(leftSetter);
             nodeSetters.Add(rightSetter);
@@ -204,7 +204,7 @@ public static class Trees
             PushLeft(s, l.Right);
         }
     }
-    private static Stack<Node<int>> InOrderStack = new Stack<Node<int>>();
+    private static readonly Stack<Node<int>> InOrderStack = new Stack<Node<int>>();
     public static void InOrderInit(Node<int> n)
     {
         PushLeft(InOrderStack, n);

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms.DataVisualization.Charting;
+
 public class Arithmetic
 {
     /*********************************************************************/
@@ -42,4 +45,51 @@ public class Arithmetic
         }
     }
     /*********************************************************************/
+    public static int[] PrimeFactors(int n)
+    {
+        var primeFactors = new List<int>();
+        for (int i = 2; i * i <= n; i++)
+        {
+            while (n%i == 0)
+            {
+                primeFactors.Add(i);
+                n /= i;
+            }
+        }
+        if (n > 2) primeFactors.Add(n); // If n is a prime number.
+
+        return primeFactors.ToArray();
+    }
+    public static void TestPrimeFactors()
+    {
+        var result = PrimeFactors(100);
+        result = PrimeFactors(123903);
+    }
+    /*********************************************************************/
+    public static bool IsPrime(int n)
+    {
+        if (n < 2) return false;
+
+        int m = n;
+        for (int i = 2; i * i <= n; i++)
+        {
+            while (n%i == 0)
+            {
+                n /= i;
+            }
+        }
+        return m == n;
+    }
+    public static void TestIsPrime()
+    {
+        var result = IsPrime(1);
+        result = IsPrime(2);
+        result = IsPrime(3);
+        result = IsPrime(4);
+        result = IsPrime(5);
+        result = IsPrime(6);
+        result = IsPrime(101);
+    }
+    /*********************************************************************/
 }
+

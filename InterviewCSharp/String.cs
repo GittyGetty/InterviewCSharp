@@ -1,4 +1,6 @@
-﻿namespace Interview
+﻿using System.Collections.Generic;
+
+namespace Interview
 {
     public class String
     {
@@ -47,9 +49,7 @@
 
             return longest;
         }
-
         /*********************************************************************/
-
         public static string GetLongestPalindrome(string s)
         {
             if (s.Length == 0) return string.Empty;
@@ -86,6 +86,42 @@
 
             return s.Substring(longest_start, longest_length);
         }
-    }
+        /*********************************************************************/
+        // Two maps are needed, because different characters in one string
+        // could map to the same character otherwise.
+        public static bool IsIsomorphic(string s1, string s2)
+        {
+            if (s1.Length != s2.Length) return false;
 
+            var charMap1 = new Dictionary<char, char>();
+            var charMap2 = new Dictionary<char, char>();
+
+            for (int i = 0; i < s1.Length; i++)
+            {
+                if (charMap1.ContainsKey(s1[i]))
+                {
+                    if (charMap1[s1[i]] != s2[i]) return false;
+                }
+                charMap1[s1[i]] = s2[i];
+
+                if (charMap2.ContainsKey(s2[i]))
+                {
+                    if (charMap2[s2[i]] != s1[i]) return false;
+                }
+                charMap2[s2[i]] = s1[i];
+            }
+            return true;
+        }
+        public static void IsIsomorphicTest()
+        {
+            bool result;
+            result = IsIsomorphic("aabbbccaab", "AABBBCCAAB");
+            result = IsIsomorphic("aabbbccaab", "AABBBCCAAD");
+            result = IsIsomorphic("aaa", "aaa");
+            result = IsIsomorphic("aaa", "aax");
+            result = IsIsomorphic("aaa", "xxx");
+            result = IsIsomorphic("a", "aa");
+        } 
+        /*********************************************************************/
+    }
 }
